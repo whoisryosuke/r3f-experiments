@@ -390,3 +390,11 @@ template {
     padding: 0;
     overflow: hidden;
   }
+
+/* Game
+  ========================================================================== */
+
+
+body {
+  background-color: #000;
+}
