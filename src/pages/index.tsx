@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 // WARNING ! errors might get obfuscated by using dynamic import.
 // If something goes wrong go back to a static import to show the error.
 // https://github.com/pmndrs/react-three-next/issues/49
-const Shader = dynamic(() => import('@/components/canvas/Shader/Shader'), {
+const Scene = dynamic(() => import('@/components/canvas/Scene'), {
   ssr: false,
 })
 
@@ -20,7 +20,7 @@ const DOM = () => {
 const R3F = ({r3f = true}) => {
   return (
     <>
-      <Shader />
+      <Scene />
     </>
   )
 }
