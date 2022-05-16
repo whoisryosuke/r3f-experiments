@@ -8,6 +8,7 @@ type Props = {
 
 const BULLET_VELOCITY = 0.1
 
+// @todo: Take initial position for player so bullet spawns in correct place when player moves
 const Bullet = ({removeBullet, id}: Props) => {
     const ref = useRef(null);
     // Destroy bullet after 3 seconds
@@ -18,6 +19,7 @@ const Bullet = ({removeBullet, id}: Props) => {
         }
     }, [removeBullet, id])
 
+    // Animate bullet to move deeper into space
     useFrame(() => {
         ref.current.position.z -= BULLET_VELOCITY;
     })
