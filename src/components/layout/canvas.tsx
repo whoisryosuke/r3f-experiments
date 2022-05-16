@@ -34,7 +34,7 @@ const LCanvas = ({ children }) => {
         // This breaks all interactions (hover, click/press, etc)
         // onCreated={(state) => state.events.connect(dom.current)}
       >
-        <LControl />
+        {/* <LControl /> */}
         <Preload all />
         {children}
       </Canvas>
