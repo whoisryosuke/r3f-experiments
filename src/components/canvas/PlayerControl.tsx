@@ -21,6 +21,18 @@ const PlayerControl = (props: Props) => {
             playerRef.current.position.z += 0.1
             camera.position.z += 0.1
         }
+        if(controls.left) {
+            console.log('moving forward')
+            playerRef.current.position.x -= 0.1
+            camera.translateX(-0.1);
+            // camera.position.x -= 0.1
+        }
+        if(controls.right) {
+            console.log('moving forward')
+            playerRef.current.position.x += 0.1
+            camera.translateX(0.1);
+            // camera.position.x += 0.1
+        }
     })
   return (
     <><Player ref={playerRef} /></>

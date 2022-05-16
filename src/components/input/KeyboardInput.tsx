@@ -11,7 +11,7 @@ const KeyboardInput = (props: Props) => {
     // and try to access data here, it will be stale
     // Makes a case for a centralized input class that can share store
     // instead of grabbing store each key and each keypress!
-    const { controls, setforward } = useStore.getState()
+    const { controls, setforward} = useStore.getState()
     console.log('actions', setforward)
     setforward?.(true);
   }
@@ -27,8 +27,26 @@ const KeyboardInput = (props: Props) => {
     const { setbackward } = useStore.getState()
     setbackward?.(false);
   }
+  const movePlayerLeft = () => {
+    const { setleft } = useStore.getState()
+    setleft?.(true);
+  }
+  const movePlayerLeftDone = () => {
+    const { setleft } = useStore.getState()
+    setleft?.(false);
+  }
+  const movePlayerRight = () => {
+    const { setright } = useStore.getState()
+    setright?.(true);
+  }
+  const movePlayerRightDone = () => {
+    const { setright } = useStore.getState()
+    setright?.(false);
+  }
   useKeyPress("w", null, movePlayerUp, movePlayerUpDone)
   useKeyPress("s", null, movePlayerDown, movePlayerDownDone)
+  useKeyPress("a", null, movePlayerLeft, movePlayerLeftDone)
+  useKeyPress("d", null, movePlayerRight, movePlayerRightDone)
 
   // Debug
   // if (players[0].module.getPadId()) console.log("is pressed?", pressed)
