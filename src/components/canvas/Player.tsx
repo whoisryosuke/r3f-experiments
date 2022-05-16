@@ -7,7 +7,7 @@ type Props = {}
 const Player = React.forwardRef((props: Props, ref) => {
   return (
     <group ref={ref}>
-        <mesh position={[2,3,3]} rotation={[Math.PI /6, 0, -Math.PI /6]}>
+        <mesh position={[0,-1,-3]} rotation={[-Math.PI /2 + Math.PI / 9, 0, 0]}>
           <coneBufferGeometry args={[1, 5, 6]} />
           <meshPhysicalMaterial color={'blue'} />
         </mesh>
