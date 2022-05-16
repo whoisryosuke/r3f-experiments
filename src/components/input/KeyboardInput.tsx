@@ -43,10 +43,19 @@ const KeyboardInput = (props: Props) => {
     const { setright } = useStore.getState()
     setright?.(false);
   }
+  const shoot = () => {
+    const { setshoot } = useStore.getState()
+    setshoot?.(true);
+  }
+  const shootDone = () => {
+    const { setshoot } = useStore.getState()
+    setshoot?.(false);
+  }
   useKeyPress("w", null, movePlayerUp, movePlayerUpDone)
   useKeyPress("s", null, movePlayerDown, movePlayerDownDone)
   useKeyPress("a", null, movePlayerLeft, movePlayerLeftDone)
   useKeyPress("d", null, movePlayerRight, movePlayerRightDone)
+  useKeyPress(" ", null, shoot, shootDone)
 
   // Debug
   // if (players[0].module.getPadId()) console.log("is pressed?", pressed)

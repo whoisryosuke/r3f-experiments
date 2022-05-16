@@ -3,6 +3,7 @@ import React from 'react'
 import KeyboardInput from '../input/KeyboardInput'
 import PlayerControl from './PlayerControl'
 import DebugObjects from './DebugObjects'
+import BulletControl from './BulletControl'
 
 type Props = {}
 
@@ -12,6 +13,7 @@ const Scene = (props: Props) => {
       <Stars />
       <DebugObjects />
       <PlayerControl />
+      <BulletControl />
       <KeyboardInput />
       <ambientLight />
     </>

@@ -33,6 +33,7 @@
     "react-is": "^18.1.0",
     "three": "^0.140.2",
     "three-stdlib": "^2.9.1",
+    "throttle-debounce": "^5.0.0",
     "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {
