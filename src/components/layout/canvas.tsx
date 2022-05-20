@@ -1,13 +1,13 @@
-import { Canvas } from '@react-three/fiber'
-import { A11yAnnouncer } from '@react-three/a11y'
-import { Environment, OrbitControls, Preload, Stats } from '@react-three/drei'
-import useStore from '@/helpers/store'
-import { useEffect, useRef } from 'react'
-import { EffectComposer, SSAO } from "@react-three/postprocessing"
+import { Canvas } from "@react-three/fiber";
+import { A11yAnnouncer } from "@react-three/a11y";
+import { Environment, OrbitControls, Preload, Stats } from "@react-three/drei";
+import useStore from "@/helpers/store";
+import { useEffect, useRef } from "react";
+import { EffectComposer, SSAO } from "@react-three/postprocessing";
 
 const LControl = () => {
-  const dom = useStore((state) => state.dom)
-  const control = useRef(null)
+  const dom = useStore((state) => state.dom);
+  const control = useRef(null);
 
   // useEffect(() => {
   //   if (control) {
@@ -15,12 +15,15 @@ const LControl = () => {
   //   }
   // }, [dom, control])
   // @ts-ignore
-  return <OrbitControls ref={control} 
-    //domElement={dom.current} 
-  />
-}
+  return (
+    <OrbitControls
+      ref={control}
+      //domElement={dom.current}
+    />
+  );
+};
 const LCanvas = ({ children }) => {
-  const dom = useStore((state) => state.dom)
+  const dom = useStore((state) => state.dom);
 
   return (
     <>
@@ -28,9 +31,9 @@ const LCanvas = ({ children }) => {
         shadows
         // Is this deprecated or typed wrong? Ignoring for now.
         // @ts-ignore
-        mode='concurrent'
+        mode="concurrent"
         style={{
-          position: 'absolute',
+          position: "absolute",
           top: 0,
         }}
         // Sets resolution a little higher (set lower for easy "pixelated" look)
@@ -43,25 +46,48 @@ const LCanvas = ({ children }) => {
         <Stats />
         {/* <LControl /> */}
         <Preload all />
-        
+
         {children}
 
         {/* Lighting */}
         <ambientLight intensity={0.75} />
-        <spotLight position={[20, 20, 25]} penumbra={1} angle={0.2} color="white" castShadow shadow-mapSize={[512, 512]} />
+        <spotLight
+          position={[20, 20, 25]}
+          penumbra={1}
+          angle={0.2}
+          color="white"
+          castShadow
+          shadow-mapSize={[512, 512]}
+        />
         <directionalLight position={[0, 5, -4]} intensity={4} />
-        <directionalLight position={[0, -15, -0]} intensity={4} color="purple" />
+        <directionalLight
+          position={[0, -15, -0]}
+          intensity={4}
+          color="purple"
+        />
 
         {/* Post-processing  */}
         <Environment files="/hdr/hilly_terrain_01_4k.hdr" />
         <EffectComposer multisampling={0}>
-          <SSAO samples={11} radius={30} intensity={20} luminanceInfluence={0.6} color="purple" />
-          <SSAO samples={21} radius={5} intensity={30} luminanceInfluence={0.6} color="purple" />
+          <SSAO
+            samples={11}
+            radius={30}
+            intensity={20}
+            luminanceInfluence={0.6}
+            color="purple"
+          />
+          <SSAO
+            samples={21}
+            radius={5}
+            intensity={30}
+            luminanceInfluence={0.6}
+            color="purple"
+          />
         </EffectComposer>
       </Canvas>
       <A11yAnnouncer />
     </>
-  )
-}
+  );
+};
 
-export default LCanvas
+export default LCanvas;
