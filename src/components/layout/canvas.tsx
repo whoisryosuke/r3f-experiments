@@ -24,6 +24,7 @@ const LCanvas = ({ children }) => {
   return (
     <>
       <Canvas
+        shadows
         // Is this deprecated or typed wrong? Ignoring for now.
         // @ts-ignore
         mode='concurrent'

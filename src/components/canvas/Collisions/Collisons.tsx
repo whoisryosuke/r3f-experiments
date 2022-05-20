@@ -15,10 +15,10 @@ const Collisons = (props: Props) => {
         api.position.set((state.mouse.x * viewport.width) / 2, (state.mouse.y * viewport.height) / 2, 2.5)
     })
     return <>
-        <mesh name="debug-sphere" ref={ref}>
+        {/* <mesh name="debug-sphere" ref={ref}>
             <sphereBufferGeometry args={[1, 8, 4]} />
             <meshPhysicalMaterial color={'green'} />
-        </mesh>
+        </mesh> */}
     </>
 }
 
