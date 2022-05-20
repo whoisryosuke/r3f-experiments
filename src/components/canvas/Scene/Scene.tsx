@@ -12,13 +12,11 @@ const Scene = () => {
   return (
     <>
         <Physics gravity={[0, 0, 0]} iterations={10} >
-            {new Array(10).fill(0).map((_,index) => 
+            {new Array(50).fill(0).map((_,index) => 
                 <Sphere key={index} factor={FACTORS[FACTORS.length % index]} />
             )}
             <Collisons />
         </Physics>
-        <directionalLight position={[5, 5, 5]} />
-        <ambientLight />
     </>
   )
 }
