@@ -1,11 +1,12 @@
 import dynamic from 'next/dynamic'
 // import Shader from '@/components/canvas/Shader/Shader'
+// import Game from '@/components/canvas/Game'
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
 // If something goes wrong go back to a static import to show the error.
 // https://github.com/pmndrs/react-three-next/issues/49
-const Shader = dynamic(() => import('@/components/canvas/Shader/Shader'), {
+const Game = dynamic(() => import('@/components/canvas/Game'), {
   ssr: false,
 })
 
@@ -20,7 +21,7 @@ const DOM = () => {
 const R3F = ({r3f = true}) => {
   return (
     <>
-      <Shader />
+      <Game />
     </>
   )
 }
