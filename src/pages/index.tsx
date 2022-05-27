@@ -1,3 +1,4 @@
+import * as THREE from 'three'
 import dynamic from 'next/dynamic'
 // import Shader from '@/components/canvas/Shader/Shader'
 
@@ -20,7 +21,16 @@ const DOM = () => {
 const R3F = ({r3f = true}) => {
   return (
     <>
-      <Shader />
+      <Shader
+        color={new THREE.Color(8/255, 108/255, 149/255)}
+        borderColor={new THREE.Color(0.9,0.9,0.9)}
+        position={[-1,0,0]}
+      />
+      <Shader
+        color={new THREE.Color(149/255, 108/255, 8/255)}
+        borderColor={new THREE.Color(0.9,0.9,0.9)}
+        position={[1,0,0]}
+        />
     </>
   )
 }

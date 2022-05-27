@@ -1,9 +1,9 @@
 import * as THREE from 'three'
-import { useFrame, extend } from '@react-three/fiber'
+import { useFrame, extend, MeshProps } from '@react-three/fiber'
 import { useRef, useState } from 'react'
 import useStore from '@/helpers/store'
 import { shaderMaterial } from '@react-three/drei'
-import { Mesh } from "three"
+import { Color, Mesh } from "three"
 
 import vertex from './glsl/shader.vert'
 import fragment from './glsl/shader.frag'
@@ -11,8 +11,8 @@ import fragment from './glsl/shader.frag'
 const ColorShiftMaterial = shaderMaterial(
   {
     time: 0,
-    color: new THREE.Color(0.05, 0.2, 0.025),
-    borderColor: new THREE.Color(0.15, 0.3, 0.025),
+    color: new THREE.Color(8/255, 108/255, 149/255),
+    borderColor: new THREE.Color(0.9,0.9,0.9),
     borderWidth: 0.1,
   },
   vertex,
@@ -26,10 +26,18 @@ ColorShiftMaterial.key = THREE.MathUtils.generateUUID()
 
 extend({ ColorShiftMaterial })
 
-const Shader = (props: Mesh) => {
+type Props = Partial<MeshProps> & {
+  color: Color;
+  borderColor: Color;
+}
+
+const Shader = ({
+  color,
+  borderColor,
+  ...props
+}: Props) => {
   const meshRef = useRef(null)
-  const [hovered, setHover] = useState(false)
-  const router = useStore((state) => state.router)
+  console.log('color', color)
 
   useFrame((state, delta) => {
     if (meshRef.current) {
@@ -39,17 +47,18 @@ const Shader = (props: Mesh) => {
       meshRef.current.material.uniforms.time.value +=
         Math.sin(delta / 2) * Math.cos(delta / 2)
     }
+
+    if(meshRef.current.material && color) {
+      meshRef.current.material.uniforms.color.value = color;
+    }
+    if(meshRef.current.material && borderColor) {
+      meshRef.current.material.uniforms.borderColor.value = borderColor;
+    }
   })
 
   return (
     <mesh
       ref={meshRef}
-      scale={hovered ? 1.1 : 1}
-      onClick={() => {
-        router.push(`/box`)
-      }}
-      onPointerOver={(e) => setHover(true)}
-      onPointerOut={(e) => setHover(false)}
       {...props}
     >
       <boxBufferGeometry args={[1, 1, 1]} />
