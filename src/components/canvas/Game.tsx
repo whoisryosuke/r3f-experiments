@@ -1,66 +1,78 @@
-import { useFrame } from '@react-three/fiber'
-import React, { useState } from 'react'
-import Button from './Button';
-import useStore from "@/helpers/store"
-import PlayerInput from '../modules/PlayerInput';
-import CustomText from './Text';
+import { useFrame } from "@react-three/fiber";
+import React, { useState } from "react";
+import Button from "./Button";
+import Level from "./Level";
+import Player from "./Player";
+import useStore from "@/helpers/store";
+import PlayerInput from "../modules/PlayerInput";
+import CustomText from "./Text";
+import { Vector3 } from "three";
 
-type Props = {}
+type Props = {};
 
 const Game = (props: Props) => {
-    const [gameStarted, setGameStarted] = useState(false);
-    const [gameStartTime, setGameStartTime] = useState<Date>(null);
-    const { score, addScore } = useStore();
+  const [gameStarted, setGameStarted] = useState(false);
+  const [walk, setWalk] = useState(false);
+  //   const [playerPosition, setPlayerPosition] = useState(new Vector3(0, -1, 0));
+  const [playerPosition, setPlayerPosition] = useState([0, -1, 0]);
 
-    const startGame = () => {
-        setGameStarted(true);
-        setGameStartTime(new Date());
+  const startGame = () => {
+    setGameStarted(true);
+  };
+
+  const endGame = () => {
+    setGameStarted(false);
+  };
+
+  useFrame(() => {
+    const { controls } = useStore.getState();
+
+    let isWalking = false;
+    if (controls.left) {
+      console.log("moving left!");
+      //   setPlayerPosition((prevPosition) =>
+      //     prevPosition.setX(prevPosition.x + 0.1)
+      //   );
+      setPlayerPosition((prevPosition) => [
+        prevPosition[0] - 0.01,
+        prevPosition[1],
+        prevPosition[2],
+      ]);
+      isWalking = true;
     }
-
-    const endGame = () => {
-        setGameStarted(false);
-        setGameStartTime(null);
+    if (controls.right) {
+      setPlayerPosition((prevPosition) => [
+        prevPosition[0] + 0.01,
+        prevPosition[1],
+        prevPosition[2],
+      ]);
+      isWalking = true;
     }
+    setWalk(isWalking);
+  });
 
-    const increaseScore = (newScore: number) => {
-        addScore(newScore);
-    }
-
-    // Create a start time
-    // If player presses input in 1 second increments (or kinda near)
-    // Score increases
-    useFrame(() => {
-        const { controls: { confirm } } = useStore.getState();
-
-        if(confirm) {
-            // Check if it's close to 1 second interval of time
-            const currentTime = new Date();
-            const gameTime = currentTime.getTime() - gameStartTime.getTime();
-            const seconds = gameTime/1000;
-            const decimalTime = seconds % 1;
-            
-            // Increase score if the difference is small (0.1 or less)
-            if(decimalTime <= 0.1) {
-                console.log('score increased!')
-                increaseScore(100);
-            }
-
-            console.log('difference is', seconds, decimalTime)
-        }
-        
-    })
+  console.log("player position", playerPosition);
 
   return (
     <>
-        {gameStarted && <>
-            <CustomText>{score}</CustomText>
-            <PlayerInput />
-        </>}
-        {!gameStarted && <Button gameStarted={gameStarted} startGame={startGame} endGame={endGame} />}
-        <directionalLight position={[5, 5, 5]} />
-        <ambientLight />
+      {gameStarted && (
+        <>
+          <Player position={playerPosition} walk={walk} />
+          <Level />
+          <PlayerInput />
+        </>
+      )}
+      {!gameStarted && (
+        <Button
+          gameStarted={gameStarted}
+          startGame={startGame}
+          endGame={endGame}
+        />
+      )}
+      <directionalLight position={[5, 5, 5]} />
+      <ambientLight />
     </>
-  )
-}
+  );
+};
 
-export default Game
+export default Game;
