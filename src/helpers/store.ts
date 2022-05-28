@@ -1,5 +1,5 @@
-import create from 'zustand'
-import { devtools, persist } from "zustand/middleware"
+import create from "zustand";
+import { devtools, persist } from "zustand/middleware";
 
 type Controls = {
     confirm: boolean;
@@ -30,7 +30,6 @@ export const useStore = create<AppState>()(
       }))
     })
   )
-)
+);
 
-
-export default useStore
+export default useStore;
