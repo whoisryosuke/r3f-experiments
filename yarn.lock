@@ -1122,6 +1122,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@pmndrs/cannon-worker-api@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@pmndrs/cannon-worker-api/-/cannon-worker-api-2.1.0.tgz#c4650a59a9f4e919157c85a0dfcd37894dd2b31f"
+  integrity sha512-sXqDYEWfY99LYwnHcr3nPeTSqkXii2MBFG2O2Yv/+PIy63tiBJz5CIijkPr1+dmLV2YGSQjSzQFcaTNFMcOcRA==
+
 "@polka/url@^1.0.0-next.20":
   version "1.0.0-next.21"
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.21.tgz#5de5a2385a35309427f6011992b544514d559aa1"
@@ -1379,6 +1384,15 @@
   dependencies:
     utility-types "^3.10.0"
     zustand "^3.2.0"
+
+"@react-three/cannon@^6.3.0":
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/@react-three/cannon/-/cannon-6.3.0.tgz#7773270bcdb797a4287b7d389159eb9433dc3bec"
+  integrity sha512-ZLX/LtJRRi2J/jFcZsZ19q6lrTBQxm5OtY0D9GOdV1vNiwyM9ACRoaMXMHN0zUdaUn7Psls9w5n1VfF5FY4C7Q==
+  dependencies:
+    "@pmndrs/cannon-worker-api" "^2.1.0"
+    cannon-es "^0.19.0"
+    cannon-es-debugger "^1.0.0"
 
 "@react-three/drei@^9.11.3":
   version "9.11.3"
@@ -1970,6 +1984,16 @@ caniuse-lite@^1.0.30001332:
   version "1.0.30001340"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001340.tgz#029a2f8bfc025d4820fafbfaa6259fd7778340c7"
   integrity sha512-jUNz+a9blQTQVu4uFcn17uAD8IDizPzQkIKh3LCJfg9BkyIqExYYdyc/ZSlWUSKb8iYiXxKsxbv4zYSvkqjrxw==
+
+cannon-es-debugger@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/cannon-es-debugger/-/cannon-es-debugger-1.0.0.tgz#28c6679b30dcf608e978225239f447a8fe55ccb4"
+  integrity sha512-sE9lDOBAYFKlh+0w+cvWKwUhJef8HYnUSVPWPL0jD15MAuVRQKno4QYZSGxgOoJkMR3mQqxL4bxys2b3RSWH8g==
+
+cannon-es@^0.19.0:
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/cannon-es/-/cannon-es-0.19.0.tgz#f62fa04097e375877db8f3895f27bb6d499395c0"
+  integrity sha512-fu9UXrjFmAQXq3JyBVPbtyc53suX+QHzikZEJykxroVNnIx1xHq0jZenK8qwhdwbBAtDL9n/47TyPELuSQwZuA==
 
 chalk@^2.0.0:
   version "2.4.2"

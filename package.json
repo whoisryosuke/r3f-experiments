@@ -23,6 +23,7 @@
   "dependencies": {
     "@react-spring/three": "^9.4.5",
     "@react-three/a11y": "^3.0.0",
+    "@react-three/cannon": "^6.3.0",
     "@react-three/drei": "^9.11.3",
     "@react-three/fiber": "^8.0.22",
     "babel-plugin-glsl": "^1.0.0",
