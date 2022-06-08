@@ -3,18 +3,21 @@ import create from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
 interface GameControls {
-  paddle: boolean;
+  // Directional
+  forward: boolean;
+  backward: boolean;
+  left: boolean;
+  right: boolean;
+
+  // Face input
+  confirm: boolean;
+  cancel: boolean;
 }
 
 export interface AppState {
   // NextJS router
   router: Router;
   setRouter: (router) => void;
-
-  // Add any types for app-wide state here
-  // e.g. game start logic, points/score, etc
-  // gameStarted: boolean;
-  // points: number;
 
   // User input mapping
   controls: GameControls;
@@ -38,7 +41,14 @@ export const useStore = create<AppState>()(
         })),
 
       controls: {
-        paddle: false,
+        forward: false,
+        backward: false,
+        left: false,
+        right: false,
+
+        // Face input
+        confirm: false,
+        cancel: false,
       },
       setControls: (newControls) =>
         set((state) => ({
@@ -48,11 +58,6 @@ export const useStore = create<AppState>()(
             ...newControls,
           },
         })),
-
-      // Add any default values for app-wide state here
-      // e.g. game start logic, points/score, etc
-      // gameStarted: true,
-      // points: 100,
     })
 
     // END: Optional persist

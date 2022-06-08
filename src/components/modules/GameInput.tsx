@@ -7,19 +7,31 @@ type Props = {};
 function GameInput({}: Props) {
   const { setControls } = useStore();
 
-  const handleShootDown = () => {
+  const handleForwardDown = () => {
     console.log("paddle down!");
     setControls({
-      paddle: true,
+      forward: true,
     });
   };
-  const handleShootUp = () => {
+  const handleForwardUp = () => {
     setControls({
-      paddle: false,
+      forward: false,
+    });
+  };
+  const handleBackDown = () => {
+    console.log("paddle down!");
+    setControls({
+      backward: true,
+    });
+  };
+  const handleBackUp = () => {
+    setControls({
+      backward: false,
     });
   };
 
-  useKeyPress("s", null, handleShootDown, handleShootUp);
+  useKeyPress("w", null, handleForwardDown, handleForwardUp);
+  useKeyPress("s", null, handleBackDown, handleBackUp);
 
   return <></>;
 }
