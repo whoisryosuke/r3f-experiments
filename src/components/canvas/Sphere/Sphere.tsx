@@ -4,7 +4,7 @@ import { Vector3 } from "three";
 
 const Sphere = ({ vec = new Vector3(), factor = 1, ...props }) => {
   const [ref, api] = useSphere(() => ({
-    position: [1 * factor, 1 * factor, 2 * factor],
+    position: [1, 1 * factor, 2],
     rotation: [0, 0, 0],
     mass: 1,
     angularDamping: 0.2,

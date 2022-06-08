@@ -2,6 +2,10 @@ import { Router } from "next/router";
 import create from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
+interface GameControls {
+  paddle: boolean;
+}
+
 export interface AppState {
   // NextJS router
   router: Router;
@@ -11,6 +15,10 @@ export interface AppState {
   // e.g. game start logic, points/score, etc
   // gameStarted: boolean;
   // points: number;
+
+  // User input mapping
+  controls: GameControls;
+  setControls: (controls: Partial<GameControls>) => void;
 }
 
 export const useStore = create<AppState>()(
@@ -27,6 +35,18 @@ export const useStore = create<AppState>()(
         set((state) => ({
           ...state,
           router,
+        })),
+
+      controls: {
+        paddle: false,
+      },
+      setControls: (newControls) =>
+        set((state) => ({
+          ...state,
+          controls: {
+            ...state.controls,
+            ...newControls,
+          },
         })),
 
       // Add any default values for app-wide state here
