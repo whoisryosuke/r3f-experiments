@@ -977,6 +977,18 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@hmans/controlfreak@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@hmans/controlfreak/-/controlfreak-0.2.0.tgz#a1009d36612bf86e85316f049e82be25ff3606c1"
+  integrity sha512-+Hk1rZZTiAXkL49goKLaDjX77ZHwACjeZTHny3bSvo+4ooj1XBMijb/kdr+UeToZ7DTr3yj/F+wXipdpduNdNw==
+  dependencies:
+    "@hmans/signal" "^0.1.8"
+
+"@hmans/signal@^0.1.8":
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/@hmans/signal/-/signal-0.1.8.tgz#46788033db3a24206ff91962aa44097dd274390b"
+  integrity sha512-jhTe89A0Fzp0aRcQdB1F9Z1gDqFNFS5kZohbk/EiQqvcVJqfJ5XG0IsSEZiyAT7RuiLXupwbAn7MxXVL+iZZIA==
+
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.5"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.9.5.tgz#2cbaf9a89460da24b5ca6531b8bbfc23e1df50c7"
