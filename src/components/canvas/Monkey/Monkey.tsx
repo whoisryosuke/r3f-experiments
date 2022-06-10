@@ -1,7 +1,5 @@
-import * as THREE from "three";
-import React, { Suspense, useEffect, useMemo } from "react";
-import { Canvas } from "@react-three/fiber";
-import { Physics, usePlane, useConvexPolyhedron } from "@react-three/cannon";
+import React, { useEffect, useMemo } from "react";
+import { useConvexPolyhedron } from "@react-three/cannon";
 import { useGLTF } from "@react-three/drei";
 import { Geometry } from "three-stdlib";
 import { Vector3 } from "three";
@@ -19,14 +17,20 @@ function toConvexProps(bufferGeometry) {
 }
 
 export default function Monkey(props) {
+  // Required stuff
   const { nodes } = useGLTF("/models/monkey.glb");
-  console.log("nodes", nodes);
+
+  // Make sure to check the console log above for the mesh name
+  // it changes per model/file - it usually matches object name in Blender/3D app
+  // console.log("nodes", nodes);
   const geo = useMemo(() => toConvexProps(nodes.Suzanne.geometry), [nodes]);
   const [ref, api] = useConvexPolyhedron(() => ({
     mass: 1,
     ...props,
     args: geo,
   }));
+
+  // This is for effect - not required
   const vec = new Vector3();
   const factor = 0.5;
   useEffect(
