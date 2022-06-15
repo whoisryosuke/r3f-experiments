@@ -16,7 +16,7 @@ const MOVE_MULTIPLIER = 10;
 const Player = ({ disabled = false, position, ...props }: Props) => {
   // const position = useRef<Vector3>([0, 0, 0]);
   const playerRef = useRef<Group>();
-  const [, api] = useBox(() => ({ mass: 10, position }), playerRef);
+  const [, api] = useBox(() => ({ mass: 2, position }), playerRef);
 
   useFrame(() => {
     // console.log("input", input.controls.move.value);
@@ -52,7 +52,8 @@ const Player = ({ disabled = false, position, ...props }: Props) => {
       const oldY = playerRef.current.position.y;
       // playerRef.current.position.set(newX, null, newZ);
       // api.position.set(newX, oldY, newZ);
-      api.velocity.set(newX, null, newZ);
+      api.velocity.set(newX, 0, newZ);
+      api.rotation.set(0, 0, 0);
     }
   });
 
