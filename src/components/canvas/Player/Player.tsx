@@ -1,31 +1,34 @@
 import useStore from "@/helpers/store";
 import { GroupProps, useFrame, Vector3 } from "@react-three/fiber";
 import { useRef, useState } from "react";
-import { Mesh } from "three";
+import { Group } from "three";
 import PlayerModel from "./PlayerModel";
 import input from "@/modules/input";
+import { useBox } from "@react-three/cannon";
 
 type Props = Partial<GroupProps> & {
   disabled?: boolean;
 };
 
-const MOVE_MULTIPLIER = 0.1;
+const MOVE_MULTIPLIER = 1;
 
 const Player = ({ disabled = false, ...props }: Props) => {
   // const position = useRef<Vector3>([0, 0, 0]);
-  const playerRef = useRef<Mesh>();
+  // const playerRef = useRef<Group>();
+  const [ref, api] = useBox(() => ({ mass: 1 }));
 
   useFrame(() => {
     // console.log("input", input.controls.move.value);
     // Jump command
     if (input.controls.fire.value) {
-      let newY = playerRef.current.position.y + 1;
+      let newY = ref.current.position.y + 1;
 
       // Limit jump height
       if (newY > 1) {
         newY = 1;
       }
-      playerRef.current.position.set(0, newY, 0);
+      api.position.set(0, newY, 0);
+      // api.velocity.set(0, 3, 0);
     }
     // Movement
     if (input.controls.move.value) {
@@ -36,18 +39,19 @@ const Player = ({ disabled = false, ...props }: Props) => {
       const inputZ = input.controls.move.value.y * -1 * MOVE_MULTIPLIER;
 
       // Add the current position with the movement amount
-      const newX = playerRef.current.position.x + inputX;
-      const newZ = playerRef.current.position.z + inputZ;
+      const newX = ref.current.position.x + inputX;
+      const newZ = ref.current.position.z + inputZ;
 
       // We save Y just in case it changes? Also just shorter
-      const oldY = playerRef.current.position.y;
-      playerRef.current.position.set(newX, oldY, newZ);
+      const oldY = ref.current.position.y;
+      // api.position.set(newX, oldY, newZ);
+      api.velocity.set(newX, oldY, newZ);
     }
   });
 
   return (
-    <group {...props}>
-      <PlayerModel ref={playerRef} />
+    <group ref={ref} {...props}>
+      <PlayerModel />
     </group>
   );
 };
