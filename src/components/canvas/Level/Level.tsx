@@ -1,5 +1,6 @@
 import { usePlane } from "@react-three/cannon";
 import { GroupProps } from "@react-three/fiber";
+import Obstacle from "../Obstacle/Obstacle";
 
 type Props = Partial<GroupProps> & {};
 
@@ -14,6 +15,8 @@ const Level = ({ ...props }: Props) => {
         <planeBufferGeometry args={[100, 100]} />
         <meshPhysicalMaterial color={"green"} />
       </mesh>
+
+      <Obstacle position={[3, 0, 3]} />
 
       {/* Lighting */}
       <directionalLight position={[5, 5, 5]} />
