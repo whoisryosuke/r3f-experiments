@@ -1,7 +1,7 @@
 import useStore from "@/helpers/store";
 import { GroupProps, useFrame, Vector3 } from "@react-three/fiber";
 import { useRef, useState } from "react";
-import { Mesh } from "three";
+import { Group } from "three";
 import PlayerModel from "./PlayerModel";
 import input from "@/modules/input";
 import { Triplet, useBox } from "@react-three/cannon";
@@ -11,12 +11,12 @@ type Props = Partial<GroupProps> & {
   disabled?: boolean;
 };
 
-const MOVE_MULTIPLIER = 0.1;
+const MOVE_MULTIPLIER = 10;
 
 const Player = ({ disabled = false, position, ...props }: Props) => {
   // const position = useRef<Vector3>([0, 0, 0]);
-  const playerRef = useRef<Mesh>();
-  const [, api] = useBox(() => ({ mass: 1, position }));
+  const playerRef = useRef<Group>();
+  const [, api] = useBox(() => ({ mass: 10, position }), playerRef);
 
   useFrame(() => {
     // console.log("input", input.controls.move.value);
@@ -28,11 +28,11 @@ const Player = ({ disabled = false, position, ...props }: Props) => {
       if (newY > 1) {
         newY = 1;
       }
-      playerRef.current.position.set(
-        playerRef.current.position.x,
-        newY,
-        playerRef.current.position.z
-      );
+      // playerRef.current.position.set(
+      //   playerRef.current.position.x,
+      //   newY,
+      //   playerRef.current.position.z
+      // );
       // api.position.set(0, newY, 0);
       // api.velocity.set(0, 3, 0);
     }
@@ -50,15 +50,15 @@ const Player = ({ disabled = false, position, ...props }: Props) => {
 
       // We save Y just in case it changes? Also just shorter
       const oldY = playerRef.current.position.y;
-      playerRef.current.position.set(newX, null, newZ);
+      // playerRef.current.position.set(newX, null, newZ);
       // api.position.set(newX, oldY, newZ);
-      // api.velocity.set(newX, oldY, newZ);
+      api.velocity.set(newX, null, newZ);
     }
   });
 
   return (
-    <group {...props}>
-      <PlayerModel ref={playerRef} />
+    <group ref={playerRef} {...props}>
+      <PlayerModel />
     </group>
   );
 };

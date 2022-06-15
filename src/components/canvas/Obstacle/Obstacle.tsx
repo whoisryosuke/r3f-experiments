@@ -7,7 +7,7 @@ type Props = Partial<Mesh> & {
 
 const BoxMesh = ({ position, ...props }: Props) => {
   const [ref, api] = useBox(() => ({
-    mass: 1,
+    mass: 1000,
     position,
   }));
   return (
