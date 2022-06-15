@@ -11,7 +11,7 @@ const Level = ({ ...props }: Props) => {
     position: [0, -1, 0],
   }));
   return (
-    <group {...props}>
+    <group name="level" {...props}>
       <mesh name="floor" ref={ref} castShadow receiveShadow>
         <planeBufferGeometry args={[100, 100]} />
         <meshPhysicalMaterial color={"green"} />
