@@ -9,6 +9,7 @@ const BoxMesh = ({ position, ...props }: Props) => {
   const [ref, api] = useBox(() => ({
     mass: 1000,
     position,
+    type: "Static",
   }));
   return (
     <mesh ref={ref} {...props}>

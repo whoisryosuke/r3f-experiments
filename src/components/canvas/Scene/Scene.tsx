@@ -8,7 +8,7 @@ const Scene = () => {
     <>
       <Physics>
         <Level />
-        <Player position={[0, 0.5, 0]} />
+        <Player position={[0, -0.5, 0]} />
       </Physics>
       <GameInput />
     </>

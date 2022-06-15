@@ -17,9 +17,9 @@ const Level = ({ ...props }: Props) => {
         <meshPhysicalMaterial color={"green"} />
       </mesh>
 
-      <Obstacle position={[3, 0, -1]} />
-      <Obstacle position={[3, 0, -2]} />
-      <Obstacle position={[3, 0, -3]} />
+      <Obstacle position={[3, -0.5, -1]} />
+      <Obstacle position={[3, -0.5, -2]} />
+      <Obstacle position={[3, -0.5, -3]} />
 
       {/* Lighting */}
       <directionalLight position={[5, 5, 5]} />
