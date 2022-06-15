@@ -1,7 +1,7 @@
 import useStore from "@/helpers/store";
-import { GroupProps, useFrame, Vector3 } from "@react-three/fiber";
-import { useRef, useState } from "react";
-import { Group } from "three";
+import { GroupProps, useFrame } from "@react-three/fiber";
+import { useEffect, useRef, useState } from "react";
+import { Group, Vector3 } from "three";
 import PlayerModel from "./PlayerModel";
 import input from "@/modules/input";
 import { Triplet, useBox } from "@react-three/cannon";
@@ -40,7 +40,7 @@ const Player = ({ disabled = false, position, ...props }: Props) => {
     // Jump command
     let newY = 0;
     if (input.controls.fire.value && isGrounded.current) {
-      newY = 20;
+      newY = 50;
       isGrounded.current = false;
 
       // Limit jump height
@@ -67,6 +67,26 @@ const Player = ({ disabled = false, position, ...props }: Props) => {
     api.velocity.set(newX, newY, newZ);
     // api.position.set(newX, newY, newZ);
   });
+
+  let vec = new Vector3();
+  const MULTIPLIER = 1;
+  useEffect(() => api.position.subscribe((p) => {
+    // Increase fall speed for player
+    const PLAYER_GRAVITY = 200
+    // Only do gravity when player is above the ground level (-0.4 here)
+    // if(p[1] > -0.4) {
+
+    // Only do it when player isn't grounded
+    if(!isGrounded.current) {
+    api.applyForce(
+      vec
+        .set(...p)
+        .setY(p[1] - PLAYER_GRAVITY)
+        .toArray(),
+      [0, 0, 0]
+    );
+    }
+  }), [api]) // prettier-ignore
 
   return (
     <group ref={playerRef} {...props}>
