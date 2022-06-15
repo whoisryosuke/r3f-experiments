@@ -19,15 +19,18 @@ const Player = ({ disabled = false, position, ...props }: Props) => {
   const [, api] = useBox(() => ({ mass: 2, position }), playerRef);
 
   useFrame(() => {
+    // console.log("y", playerRef.current.position.y);
     // console.log("input", input.controls.move.value);
+
     // Jump command
+    let newY = 0;
     if (input.controls.fire.value) {
-      let newY = playerRef.current.position.y + 1;
+      newY = 1;
 
       // Limit jump height
-      if (newY > 1) {
-        newY = 1;
-      }
+      // if (newY > 1) {
+      //   newY = 1;
+      // }
       // playerRef.current.position.set(
       //   playerRef.current.position.x,
       //   newY,
@@ -36,7 +39,10 @@ const Player = ({ disabled = false, position, ...props }: Props) => {
       // api.position.set(0, newY, 0);
       // api.velocity.set(0, 3, 0);
     }
+
     // Movement
+    let newX = playerRef.current.position.x;
+    let newZ = playerRef.current.position.z;
     if (input.controls.move.value) {
       // How much did we move in each direction?
       // We use the input (which is -1 to 1)
@@ -45,16 +51,12 @@ const Player = ({ disabled = false, position, ...props }: Props) => {
       const inputZ = input.controls.move.value.y * -1 * MOVE_MULTIPLIER;
 
       // Add the current position with the movement amount
-      const newX = playerRef.current.position.x + inputX;
-      const newZ = playerRef.current.position.z + inputZ;
-
-      // We save Y just in case it changes? Also just shorter
-      const oldY = playerRef.current.position.y;
-      // playerRef.current.position.set(newX, null, newZ);
-      // api.position.set(newX, oldY, newZ);
-      api.velocity.set(newX, 0, newZ);
-      api.rotation.set(0, 0, 0);
+      newX = newX + inputX;
+      newZ = newZ + inputZ;
     }
+    api.rotation.set(0, 0, 0);
+    api.velocity.set(newX, newY, newZ);
+    // api.position.set(newX, newY, newZ);
   });
 
   return (
