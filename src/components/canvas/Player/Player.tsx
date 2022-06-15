@@ -6,6 +6,7 @@ import PlayerModel from "./PlayerModel";
 import input from "@/modules/input";
 import { Triplet, useBox } from "@react-three/cannon";
 import { off } from "process";
+import { SpringValue, useSpring } from "@react-spring/three";
 
 type Props = Partial<GroupProps> & {
   position: Triplet;
@@ -13,11 +14,13 @@ type Props = Partial<GroupProps> & {
 };
 
 const MOVE_MULTIPLIER = 10;
+const JUMP_HEIGHT = 100;
 
 const Player = ({ disabled = false, position, ...props }: Props) => {
   // const position = useRef<Vector3>([0, 0, 0]);
   const isGrounded = useRef(false);
   const playerRef = useRef<Group>();
+  const jumpHeight = useRef<SpringValue>(new SpringValue(0));
   const [, api] = useBox(
     () => ({
       mass: 2,
@@ -40,14 +43,13 @@ const Player = ({ disabled = false, position, ...props }: Props) => {
     // Jump command
     let newY = 0;
     if (input.controls.fire.value && isGrounded.current) {
-      newY = 50;
+      // newY = JUMP_HEIGHT;
+      jumpHeight.current.start({ from: 0, to: JUMP_HEIGHT * 2 });
       isGrounded.current = false;
-
-      // Limit jump height
-      // if (newY > 1) {
-      //   newY = 1;
-      // }
+    } else {
+      jumpHeight.current.start({ to: 0 });
     }
+    newY = jumpHeight.current.get();
 
     // Movement
     let newX = 0;
