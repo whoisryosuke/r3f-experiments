@@ -12,7 +12,7 @@ const BoxMesh = ({ position, ...props }: Props) => {
     type: "Static",
   }));
   return (
-    <mesh name="obstacle" ref={ref} {...props}>
+    <mesh name="obstacle" ref={ref} {...props} castShadow receiveShadow>
       <boxBufferGeometry args={[1, 1, 1]} />
       <meshPhysicalMaterial color={"red"} />
     </mesh>

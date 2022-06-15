@@ -1,8 +1,11 @@
 import { usePlane } from "@react-three/cannon";
+import { softShadows } from "@react-three/drei";
 import { GroupProps } from "@react-three/fiber";
 import Obstacle from "../Obstacle/Obstacle";
 
 type Props = Partial<GroupProps> & {};
+
+softShadows();
 
 const Level = ({ ...props }: Props) => {
   const [ref, api] = usePlane(() => ({
@@ -22,7 +25,18 @@ const Level = ({ ...props }: Props) => {
       <Obstacle position={[3, -0.5, -3]} />
 
       {/* Lighting */}
-      <directionalLight position={[5, 5, 5]} />
+      <directionalLight
+        position={[5, 5, 5]}
+        castShadow
+        intensity={1.5}
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+        shadow-camera-far={50}
+        shadow-camera-left={-10}
+        shadow-camera-right={10}
+        shadow-camera-top={10}
+        shadow-camera-bottom={-10}
+      />
       <ambientLight />
     </group>
   );

@@ -14,6 +14,8 @@ const CanvasWrapper = ({ children }) => {
         // Is this deprecated or typed wrong? Ignoring for now.
         // @ts-ignore
         mode="concurrent"
+        shadows
+        camera={{ position: [-5, 2, 10], fov: 60 }}
         style={{
           position: "absolute",
           top: 0,
