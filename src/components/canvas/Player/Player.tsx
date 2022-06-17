@@ -26,7 +26,7 @@ const Player = ({ disabled = false, position, ...props }: Props) => {
       mass: 2,
       position,
       onCollide: (e) => {
-        console.log("player collided", e);
+        // console.log("player collided", e);
         // This doesn't work as intended
         // since the player can land on obstacles and not be able to jump
         // unless that's useful...

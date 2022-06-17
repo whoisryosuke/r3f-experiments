@@ -2,6 +2,7 @@ import { usePlane } from "@react-three/cannon";
 import { softShadows } from "@react-three/drei";
 import { GroupProps } from "@react-three/fiber";
 import Obstacle from "../Obstacle/Obstacle";
+import PauseMenu from "../PauseMenu/PauseMenu";
 
 type Props = Partial<GroupProps> & {};
 
@@ -23,6 +24,8 @@ const Level = ({ ...props }: Props) => {
       <Obstacle position={[3, -0.5, -1]} />
       <Obstacle position={[3, -0.5, -2]} />
       <Obstacle position={[3, -0.5, -3]} />
+
+      <PauseMenu />
 
       {/* Lighting */}
       <directionalLight

@@ -22,6 +22,10 @@ export interface AppState {
   // User input mapping
   controls: GameControls;
   setControls: (controls: Partial<GameControls>) => void;
+
+  // Game state
+  paused: boolean;
+  setPaused: (isPaused: boolean) => void;
 }
 
 export const useStore = create<AppState>()(
@@ -40,6 +44,7 @@ export const useStore = create<AppState>()(
           router,
         })),
 
+      // User input mapping
       controls: {
         forward: false,
         backward: false,
@@ -57,6 +62,14 @@ export const useStore = create<AppState>()(
             ...state.controls,
             ...newControls,
           },
+        })),
+
+      // Game State
+      paused: false,
+      setPaused: (newPaused) =>
+        set((state) => ({
+          ...state,
+          paused: newPaused,
         })),
     })
 

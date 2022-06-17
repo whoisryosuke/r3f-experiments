@@ -11,6 +11,7 @@ import {
 export const controller = new Controller();
 
 const keyboard = new KeyboardDevice();
+// Check for input IDs here: https://gamepad-tester.com/
 const gamepad = new GamepadDevice();
 const touch = new TouchDevice();
 
@@ -18,6 +19,7 @@ controller.addDevice(keyboard);
 controller.addDevice(gamepad);
 controller.addDevice(touch);
 
+// Define actions to input
 controller
   .addControl("move", VectorControl)
   .addStep(keyboard.compositeVector("KeyW", "KeyS", "KeyA", "KeyD"))
@@ -29,6 +31,11 @@ controller
   .addControl("fire", BooleanControl)
   .addStep(keyboard.whenKeyPressed(["Space", "Enter"]))
   .addStep(gamepad.whenButtonPressed(0));
+
+controller
+  .addControl("menu", BooleanControl)
+  .addStep(keyboard.whenKeyPressed(["Escape"]))
+  .addStep(gamepad.whenButtonPressed(9));
 
 controller
   .addControl("aim", VectorControl)

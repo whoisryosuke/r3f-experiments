@@ -30,12 +30,14 @@
     "babel-plugin-glsl": "^1.0.0",
     "glsl-random": "^0.0.5",
     "leva": "^0.9.27",
+    "lodash-es": "^4.17.21",
     "next": "^12.1.6",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-is": "^18.1.0",
     "three": "^0.141.0",
     "three-stdlib": "^2.10.2",
+    "throttle-debounce": "^5.0.0",
     "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {
