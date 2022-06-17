@@ -23,8 +23,8 @@ const PauseMenu = (props: Props) => {
         pauseGame(isPaused);
         console.log("pausing (or unpausing) game", isPaused);
       },
-      1000
-      // { trailing: false, leading: false }
+      1000,
+      { trailing: false, leading: true }
     ),
     [pauseGame]
   );
